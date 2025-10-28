@@ -1,0 +1,42 @@
+{% extends "core/base.html" %}
+{% block content %}
+  <h2>Certificates — {{ institution.name }}</h2>
+  <p>
+    <a class="btn btn-primary" href="{% url 'institution:cert_create' institution.pk %}">Add certificate</a>
+    <a class="btn btn-secondary" href="{% url 'admin:index' %}">Admin</a>
+  </p>
+
+  {% if certificates %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Owner name</th>
+          <th>Owner ID</th>
+          <th>Degree</th>
+          <th>Program</th>
+          <th>Conferral</th>
+          <th>Reference</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in certificates %}
+          <tr>
+            <td>{{ c.owner_name }}</td>
+            <td>{{ c.owner_id_no }}</td>
+            <td>{{ c.degree_name }}</td>
+            <td>{{ c.program }}</td>
+            <td>{{ c.conferral_date }}</td>
+            <td>{{ c.certificate_reference }}</td>
+            <td>
+              <a class="btn btn-sm btn-outline-primary" href="{% url 'institution:cert_edit' institution.pk c.pk %}">Edit</a>
+              <a class="btn btn-sm btn-outline-danger" href="{% url 'institution:cert_delete' institution.pk c.pk %}">Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="alert alert-info">No certificates yet for this institution.</div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+{% block content %}
+  <div class="p-4 bg-white rounded">
+    <h1>Academic Credential Authentication (Demo)</h1>
+    <p class="lead">Use the links in the navbar to register owner profile, request verification (HR) and confirm OTP (owner).</p>
+    <hr>
+    <ul>
+      <li>Admin: /admin (create Institutions, Certificates, OwnerProfiles)</li>
+      <li>Owner: /owner/profile/ to register mobile/email</li>
+      <li>HR: /hr/verify/ to request verification</li>
+      <li>Owner confirm OTP: /owner/confirm-otp/</li>
+    </ul>
+  </div>
+{% endblock %}

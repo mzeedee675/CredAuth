@@ -1,0 +1,10 @@
+{% extends "core/base.html" %}
+{% block content %}
+  <h2>Owner: Confirm OTP</h2>
+  <p>Enter your ID number and the OTP you received to allow HR to view your records for that request.</p>
+  <form method="post" class="mt-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">Confirm OTP</button>
+  </form>
+{% endblock %}

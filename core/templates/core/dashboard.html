@@ -1,0 +1,72 @@
+{% extends "core/base.html" %}
+{% block content %}
+  {% include "core/_navbar.html" %}
+  <div class="row g-3">
+    <div class="col-md-3">
+      <div class="card p-3">
+        <h6>Institutions</h6>
+        <h3>{{ inst_count }}</h3>
+        <a href="{% url 'government:institution_list' %}">Manage</a>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-3">
+        <h6>Businesses</h6>
+        <h3>{{ business_count }}</h3>
+        <a href="{% url 'government:business_list' %}">Manage</a>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-3">
+        <h6>Owners</h6>
+        <h3>{{ owner_count }}</h3>
+        <a href="{% url 'core:owner_profile' %}">Profiles</a>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-3">
+        <h6>Requests (pending)</h6>
+        <h3>{{ vr_pending }}</h3>
+        <small class="text-success">{{ vr_confirmed }} confirmed</small>
+        <div><a href="{% url 'core:hr_request_list' %}">View requests</a></div>
+      </div>
+    </div>
+  </div>
+
+  {% if user.is_authenticated %}
+    <hr>
+    <h4>Quick actions</h4>
+    <div class="row">
+      {% if is_government %}
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h5>Government</h5>
+            <a href="{% url 'government:institution_list' %}" class="btn btn-primary btn-sm">Institutions</a>
+            <a href="{% url 'government:business_list' %}" class="btn btn-secondary btn-sm">Businesses</a>
+          </div>
+        </div>
+      {% endif %}
+      {% if is_business_hr %}
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h5>Business HR</h5>
+            <a href="{% url 'core:hr_verify' %}" class="btn btn-primary btn-sm">Request verification</a>
+            <a href="{% url 'core:hr_request_list' %}" class="btn btn-secondary btn-sm">My requests</a>
+          </div>
+        </div>
+      {% endif %}
+      {% if is_institution_staff %}
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h5>Institution staff</h5>
+            {% for inst in user_institutions %}
+              <div><a href="{% url 'core:institution_cert_list' inst.pk %}">{{ inst.name }}</a></div>
+            {% empty %}
+              <div class="text-muted">No assigned institutions</div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}

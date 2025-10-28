@@ -1,0 +1,10 @@
+{% extends "core/base.html" %}
+{% block content %}
+  <h2>{% if creating %}Add{% else %}Edit{% endif %} certificate — {{ institution.name }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-success">{% if creating %}Create{% else %}Save{% endif %}</button>
+    <a class="btn btn-secondary" href="{% url 'institution:cert_list' institution.pk %}">Cancel</a>
+  </form>
+{% endblock %}

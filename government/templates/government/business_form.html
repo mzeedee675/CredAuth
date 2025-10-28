@@ -1,0 +1,11 @@
+{% extends "core/base.html" %}
+{% block content %}
+  {% include "core/_navbar.html" %}
+  <h2>Register Business</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-success">Register</button>
+    <a class="btn btn-secondary" href="{% url 'government:business_list' %}">Cancel</a>
+  </form>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+{% block content %}
+  {% include "core/_navbar.html" %}
+  <h2>HR: Request verification</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="mb-3">
+      {{ form.id_no.label_tag }} {{ form.id_no }}
+    </div>
+    <div class="mb-3">
+      {{ form.business.label_tag }} {{ form.business }}
+    </div>
+    <button class="btn btn-success">Send OTP</button>
+  </form>
+{% endblock %}

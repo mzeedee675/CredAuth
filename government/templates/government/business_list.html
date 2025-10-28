@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}
+{% block content %}
+  {% include "core/_navbar.html" %}
+  <h2>Businesses</h2>
+  <a class="btn btn-success" href="{% url 'government:business_create' %}">Register business</a>
+  <table class="table mt-3">
+    <thead><tr><th>Name</th><th>Reg No</th><th>Contact</th><th>Verified</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for b in businesses %}
+        <tr>
+          <td>{{ b.name }}</td>
+          <td>{{ b.registration_number }}</td>
+          <td>{{ b.contact_email }}</td>
+          <td>{% if b.verified %}Yes{% else %}No{% endif %}</td>
+          <td><a class="btn btn-sm btn-outline-primary" href="{% url 'government:business_verify' b.pk %}">Verify</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

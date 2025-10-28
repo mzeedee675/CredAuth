@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+{% block content %}
+  {% include "core/_navbar.html" %}
+  <h2>Request status</h2>
+  <p>Request: {{ vr.uuid }}</p>
+  <p>ID: {{ vr.id_no }}</p>
+  <p>Status: {{ vr.status }}</p>
+  <p>Created: {{ vr.created_at }}</p>
+  {% if vr.status == 'pending' %}
+    <p>OTP expires at: {{ vr.otp_expires_at }}</p>
+  {% endif %}
+  {% if vr.status == 'confirmed' %}
+    <a class="btn btn-primary" href="{% url 'core:hr_view_request' vr.uuid %}">View records</a>
+  {% endif %}
+{% endblock %}

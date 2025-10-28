@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+{% block content %}
+  <h2>Verify Institution: {{ institution.name }}</h2>
+  <p>Code: {{ institution.code }}</p>
+  <p>Contact: {{ institution.contact_email }}</p>
+  <form method="post">
+    {% csrf_token %}
+    {% if institution.verified %}
+      <button class="btn btn-danger" name="action" value="unverify">Unverify</button>
+    {% else %}
+      <button class="btn btn-success" name="action" value="verify">Verify</button>
+    {% endif %}
+    <a class="btn btn-secondary" href="{% url 'government:institution_list' %}">Back</a>
+  </form>
+{% endblock %}

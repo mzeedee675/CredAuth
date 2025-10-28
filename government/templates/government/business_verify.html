@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+{% block content %}
+  {% include "core/_navbar.html" %}
+  <h2>Verify Business: {{ business.name }}</h2>
+  <p>Registration number: {{ business.registration_number }}</p>
+  <p>Contact: {{ business.contact_email }}</p>
+  <form method="post">
+    {% csrf_token %}
+    {% if business.verified %}
+      <button class="btn btn-danger" name="action" value="unverify">Unverify</button>
+    {% else %}
+      <button class="btn btn-success" name="action" value="verify">Verify</button>
+    {% endif %}
+    <a class="btn btn-secondary" href="{% url 'government:business_list' %}">Back</a>
+  </form>
+{% endblock %}

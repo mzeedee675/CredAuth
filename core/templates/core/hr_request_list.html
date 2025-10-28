@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% block content %}
+  {% include "core/_navbar.html" %}
+  <h2>My verification requests</h2>
+  <table class="table">
+    <thead><tr><th>UUID</th><th>ID</th><th>Business</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for r in requests %}
+        <tr>
+          <td style="word-break:break-all">{{ r.uuid }}</td>
+          <td>{{ r.id_no }}</td>
+          <td>{{ r.hr_business }}</td>
+          <td>{{ r.status }}</td>
+          <td>{{ r.created_at }}</td>
+          <td>
+            <a href="{% url 'core:hr_request_status' r.uuid %}" class="btn btn-sm btn-outline-secondary">Status</a>
+            {% if r.status == 'confirmed' %}
+              <a href="{% url 'core:hr_view_request' r.uuid %}" class="btn btn-sm btn-primary">View</a>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

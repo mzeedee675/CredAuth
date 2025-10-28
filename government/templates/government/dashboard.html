@@ -1,0 +1,10 @@
+{% extends "core/base.html" %}
+{% block content %}
+  <h2>Government Dashboard</h2>
+  <p>Institutions: {{ inst_count }}, Pending: {{ pending_insts }}</p>
+  <p>Businesses: {{ businesses }}, Pending: {{ pending_businesses }}</p>
+  <p>
+    <a class="btn btn-primary" href="{% url 'government:institution_list' %}">Manage Institutions</a>
+    <a class="btn btn-secondary" href="{% url 'government:business_list' %}">Manage Businesses</a>
+  </p>
+{% endblock %}
